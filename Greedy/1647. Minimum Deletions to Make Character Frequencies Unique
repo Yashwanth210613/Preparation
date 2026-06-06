@@ -1,0 +1,23 @@
+class Solution {
+    public int minDeletions(String s) {
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(char c : s.toCharArray()){
+            map.put(c,map.getOrDefault(c,0)+1);
+        }
+        int[] arr = new int[map.size()];
+        int i=0;
+        for(int n:map.values()){
+            arr[i]=n;
+            i++;
+        }
+        Arrays.sort(arr);
+        int c=0;
+        for(int j=map.size()-2;j>=0;j--){
+            while(arr[j]>=arr[j+1] && arr[j]>0){
+                c++;
+                arr[j]--;
+            }
+        }
+        return c;
+    }
+}
